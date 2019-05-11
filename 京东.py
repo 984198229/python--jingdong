@@ -15,7 +15,7 @@ browser = webdriver.Chrome(options=options)
 wait =WebDriverWait(browser,50)#设置等待时间
 url = 'https://www.jd.com/'
 data_list= []#设置全局变量用来存储数据
-keyword ="python"#关键词
+keyword ="python爬虫"#关键词
 
 
 def search():
@@ -80,13 +80,13 @@ def prase_html(html):
         # 遍历
         for li in lis:
             # 名字
-            title = li.find_element_by_xpath('.//div[@class="p-name"]//em').text
+            title = li.find_element_by_xpath('.//div[@class="p-name p-name-type-2"]//em').text
             # 价格
             price = li.find_element_by_xpath('.//div[@class="p-price"]//i').text
             # 评论数
             comment = li.find_elements_by_xpath('.//div[@class="p-commit"]//a')
             # 商铺名字
-            shop_name = li.find_elements_by_xpath('.//div[@class="p-shopnum"]/a')
+            shop_name = li.find_elements_by_xpath('.//div[@class="p-shop"]//a')
             if comment:
                 comment = comment[0].text
             else:
@@ -108,11 +108,11 @@ def prase_html(html):
 def save_html():
     content = json.dumps(data_list, ensure_ascii=False, indent=2)
     #把全局变量转化为json数据
-    with open("jingdong.json", "a+", encoding="utf-8") as f:
+    with open("jingdong1.json", "a+", encoding="utf-8") as f:
         f.write(content)
         print("json文件写入成功")
 
-    with open('jingdong.csv', 'w', encoding='utf-8', newline='') as f:
+    with open('jingdong1.csv', 'w', encoding='utf-8', newline='') as f:
         # 表头
         title = data_list[0].keys()
         # 声明writer
